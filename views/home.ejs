@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
+    <title>Home Page</title>
+</head>
+<body>
+    <div class="main">
+        <div class="top">
+            <p id="logout">Logout</p>
+            <h1>URL Shortener</h1>
+            <form method="POST" action="/api/url" style="display: flex; gap: 20px; padding-bottom: 40px;">
+                <label style="font-size: 23px;">Your original URL: </label>
+                <input type="text" placeholder="http://www.example.com" name="url" required pattern="(https?://).+" title="Please enter a valid URL starting with http:// or https://"/>
+                <button type="submit">Generate</button>
+            </form>
+            <% if(locals.id) { %>
+                <h3 style="height: fit-content;">URL generated</h3><a href="http://localhost:5001/api/url/<%= id.shortId%>">http://localhost:5001/api/url/<%= id.shortId%></a>    
+            <% } %>
+        </div>
+        <% if(locals.urls) { %>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Sr. no</th>
+                        <th>ShortID</th>
+                        <th>Redirect</th>
+                        <th>Clicks</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => { %>
+                        <tr>
+                            <th><%= index + 1%></th>
+                            <th><a href="http://localhost:5001/api/url/<%= url.shortId%>"><%= url.shortId%></a></th>
+                            <th class="truncate"><%= url.redirectUrl%></th>
+                            <th style="display: flex; flex-direction: column;"><%= url.visitHistory.length%></th>
+                            <th><button class="btnDlt" data-short-url=<%= url.shortId%>>Delete</button></th>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>    
+        <% } %>
+    </div>
+    <script>
+        document.querySelectorAll('.btnDlt').forEach(button => {
+            button.addEventListener('click', function() {
+                const shortUrl = this.dataset.shortUrl;
+
+                fetch('/api/url', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        shortUrl: shortUrl
+                    })
+                })
+                .then(response => {
+                    console.log("DELETE request sent successfully!")
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+            });
+        });
+        document.getElementById('logout').addEventListener('click', function() {
+            fetch('/user/logout', {
+                method: 'GET',
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    console.log("Logged out successfully");
+                    // You can redirect the user to a login page or perform other actions here
+                } else {
+                    console.log("Logout failed");
+                }
+            })
+            .catch(error => {
+                console.error("An error occurred during logout:", error);
+            });
+        });
+    </script>
+</body>
+</html>

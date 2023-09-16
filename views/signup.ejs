@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/css/signup.css">
+   <title>Signup</title>
+</head>
+<body>
+   <section>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <div class="container">
+         <div class="signup">
+            <h1>Signup</h1>
+            <form class="form" method="post" action="/user">
+               <div class="inputBox">
+                  <input type="text" name="name" required/><i>Name</i>
+               </div>
+               <div class="inputBox">
+                  <input type="email" name="email" required/><i>Email</i>
+               </div>
+               <div class="inputBox">
+                  <input type="password" name="password" required/><i>Password</i>
+               </div>
+               <div class="links">
+                  <p><% if(locals.msg){ %><%= msg%><%}%></p>
+                  <a href="/login">Login</a>
+               </div>
+               <div class="inputBox">
+                  <input type="submit" value="Singup">
+               </div>               
+            </form>
+            <div class="tables">
+               <% if(locals.user){ %>
+                  <h4>Registered</h4>
+                  <table style="padding: 30px 50px ;">
+                     <thead>
+                        <tr>
+                           <th>Name</th>
+                           <th style="padding-left: 40px;">Email</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                           <tr>
+                              <th><%= user.name%></th>
+                              <th style="padding-left: 40px;"><%= user.email%></th>
+                           </tr>                        
+                     </tbody>
+                  </table>
+               <%}%>
+            </div>
+         </div>
+      </div>      
+   </section>
+</body>
+</html>

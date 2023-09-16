@@ -1,0 +1,21 @@
+{
+  "name": "urlshortner",
+  "version": "1.0.0",
+  "description": "urlShortner for shortning the given url and then redirecting to the original",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Vivek",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.0",
+    "nodemon": "^3.0.1",
+    "short-unique-id": "^5.0.2",
+    "uuid": "^9.0.1"
+  }
+}
